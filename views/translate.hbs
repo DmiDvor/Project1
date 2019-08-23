@@ -1,0 +1,26 @@
+<form action="/translate" method="POST">
+    <h2>Can you translate:</h2>
+    <div class="container quest-word">
+        {{#if randomWord}}
+        <span>{{randomWord.origin}}</span>
+        {{else}}
+        <span>Words not found =(</span>
+        {{/if}}
+    </div>
+
+    <div class="input-field">
+        <input type="text" name="tryTranslate">
+        <label>Your translate</label>
+    </div>
+
+    <button type="submit" class="btn">Try</button>
+</form>
+
+{{!-- <script>
+    function check () {
+        console.log('tryTranslate is ' + tryTranslate, randomWord.ru)
+        if (tryTranslate == randomWord.ru) {
+        console.log('Верно!!!')
+        }
+    }
+</script> --}}
