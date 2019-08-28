@@ -54,6 +54,14 @@ router.post('/complete', async (req, res) => {
 })
 
 
+// Запрос на удаление todo из БД
+router.post('/delete', async (req, res) => {
+    const todo = await Todo.findById(req.body.id)
+    await todo.deleteOne()
+    // редирект на главную страницу
+    res.redirect('/')
+})
+
 // Страничка с игрой
 router.get('/translate', async (req, res) => {
 

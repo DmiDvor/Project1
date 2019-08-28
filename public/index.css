@@ -1,5 +1,6 @@
 .todo {
     margin-bottom: 1rem;
+    justify-content: flex-start;
 }
 
 .todo span.completed {
@@ -10,10 +11,20 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: left;
     cursor: pointer;
     background: #f3f3f3;
     padding: 1rem;
+}
+
+.save-form {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete-form {
+    margin-left: 5px;
 }
 
 .todo i {
