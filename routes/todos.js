@@ -3,8 +3,10 @@ const Todo = require('../models/Todo') // Подключаем модель
 const Words = require('../models/Words')
 const router = Router()
 
-let randomWord
 
+let randomWord
+let correct = 0
+let wrong = 0
 // === Маршрутизация ===
 
 // Корневой маршрут
@@ -62,19 +64,35 @@ router.get('/translate', async (req, res) => {
     let randIndex = Math.floor(Math.random() * words.length)
     randomWord = words[randIndex]
 
-    // Рендерим страничку со слоучайным словом
+
+    // Рендерим страничку со случайным словом
     res.render('translate', {
         title: 'Translate',
         isTranslate: true,
+        isCorrect: correct,
+        isWrong: wrong,
         randomWord
     })
+    
 })
 
 // Обработка перевода
+
 router.post('/translate', async (req, res) => {
-    let tryTranslate = req.body.tryTranslate
-    // Some code here...
     
+    let tryTranslate = req.body.tryTranslate
+
+    // Проверка перевода
+    if (tryTranslate == randomWord.ru) {
+        // console.log('Верно!!!')
+        correct++
+        // console.log('Right ' + correct)
+    } else {
+        console.log('Translate is wrong =( ')
+        wrong++
+        // console.log('Wrong ' + wrong)
+    }
+        
     res.redirect('/translate')
 })
 

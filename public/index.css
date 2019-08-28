@@ -26,3 +26,20 @@
     font-size: 5rem;
     padding: 5px;
 }
+
+.correct {
+    display: inline;
+    margin-left: 50px;
+    color: green;
+}
+
+.wrong {
+    display: inline;
+    margin-left: 50px;
+    color: red;
+}
+
+.wait {
+    display: inline;
+    color: grey;
+}
