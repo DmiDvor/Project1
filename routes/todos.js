@@ -92,15 +92,19 @@ router.post('/translate', async (req, res) => {
 
     // Проверка перевода
     if (tryTranslate == randomWord.ru) {
-        // console.log('Верно!!!')
         correct++
-        // console.log('Right ' + correct)
     } else {
-        console.log('Translate is wrong =( ')
         wrong++
-        // console.log('Wrong ' + wrong)
     }
         
+    res.redirect('/translate')
+})
+
+// Кнопка reset (обнуление счётчиков)
+router.post('/reset', async (req, res) => {
+    correct = 0
+    wrong = 0
+    
     res.redirect('/translate')
 })
 

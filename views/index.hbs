@@ -1,39 +1,46 @@
 <h2>Todos page</h2>
 
+<form action="/create" method="POST">
+    <h5>Add new</h5>
+
+    <div class="input-field">
+        <input type="text" name="title">
+        <label>Todo title</label>
+    </div>
+    
+    <button type="submit" class="btn teal darken">Add</button>
+</form>
+
 {{#if todos.length}}            <!-- Если в массиве todos что то есть -->
 <ul>
     {{#each todos}}
         <li class="todo">
             <label>
                 <form class="save-form" action="/complete" method="POST">
-                    {{!-- <label> --}}
-                        {{#if completed}}
-                        <input type="checkbox" checked name="completed">
-                        <span class="completed">{{title}}</span>
-                        {{else}}
-                        <input type="checkbox" name="completed">
-                        <span>{{title}}</span>
-                        {{/if}}
-                        {{!-- Получение id --}}
-                        <input type="hidden" value="{{_id}}" name="id">
-                        <button class="btn btn-small" type="submit">
-                            <i class="large material-icons">done</i>
-                        </button>
-                    {{!-- </label> --}}
+                    {{#if completed}}
+                    <input type="checkbox" checked name="completed">
+                    <span class="completed">{{title}}</span>
+                    {{else}}
+                    <input type="checkbox" name="completed">
+                    <span>{{title}}</span>
+                    {{/if}}
+                    {{!-- Получение id --}}
+                    <input type="hidden" value="{{_id}}" name="id">
+                    <button class="btn btn-small" type="submit">
+                        <i class="large material-icons">done</i>
+                    </button>
                 </form>
                 <form class="delete-form" action="/delete" method="POST">
-                        {{!-- Получение id --}}
-                        <input type="hidden" value="{{_id}}" name="id">
-                        <button class="btn btn-small waves-effect waves-light red" type="submit">
-                            <i class="large material-icons">delete_forever</i>
-                        </button>
+                    {{!-- Получение id --}}
+                    <input type="hidden" value="{{_id}}" name="id">
+                    <button class="btn btn-small waves-effect waves-light red" type="submit">
+                        <i class="large material-icons">delete_forever</i>
+                    </button>
                 </form>
             </label>
-            
-            
         </li>
     {{/each}}
 </ul>
-{{else}}                        <!-- Если в массиве todos пусто -->
+{{else}}  <!-- Если в массиве todos пусто -->
 <p>Todo's not found =(</p>
 {{/if}}

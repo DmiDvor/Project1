@@ -17,6 +17,9 @@
     padding: 1rem;
 }
 
+.todo-logo {
+    margin-left: 55px;
+}
 .save-form {
     width: 100%;
     display: flex;
@@ -33,7 +36,6 @@
 
 .quest-word {
     display: inline;
-    /* background: #76a89c; */
     font-size: 5rem;
     padding: 5px;
 }
@@ -50,7 +52,6 @@
     color: red;
 }
 
-.wait {
-    display: inline;
-    color: grey;
+.reset-btn {
+    float: right;
 }

@@ -1,5 +1,5 @@
 <form action="/translate" method="POST">
-    <h2>Can you translate:</h2>
+    <h2>Can you translate?</h2>
     <div class="container quest-word">
         {{#if randomWord}}
         <span>{{randomWord.origin}}</span>
@@ -16,8 +16,9 @@
     <button type="submit" class="btn">Try</button>
     <div class="correct">Correct: <span class="rCount">{{isCorrect}}</span></div>
     <div class="wrong">Wrong: <span class="wCount">{{isWrong}}</span></div>
+</form>
 
-
-
+<form action="/reset" method="post">
+        <button type="submit" class="btn reset-btn">Reset</button>
 </form>
 
