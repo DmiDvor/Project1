@@ -22,10 +22,18 @@ router.get('/', async (req, res) => {
 }) 
 
 // Маршрут на страницу create
-router.get('/create', (req, res) => {
-    res.render('create', {
-        title: 'Create todo',
-        isCreate: true
+// router.get('/create', (req, res) => {
+//     res.render('create', {
+//         title: 'Create todo',
+//         isCreate: true
+//     })
+// })
+
+// Маршрут на страницу Add words
+router.get('/addWords', (req, res) => {
+    res.render('addWords', {
+        title: 'Add word',
+        isAddWords: true
     })
 })
 
@@ -104,10 +112,19 @@ router.post('/translate', async (req, res) => {
 router.post('/reset', async (req, res) => {
     correct = 0
     wrong = 0
-    
     res.redirect('/translate')
 })
 
+// Запрос на добавления слова в базу по модели из Words.js
+router.post('/addWord', async (req, res) => {
+    const word = new Words({
+        origin: req.body.origin,
+        ru: req.body.ru
+    })
+    // Сохранение нового слова в базу
+    await word.save()
+    res.redirect('/addWords')
+})
 
 
 
