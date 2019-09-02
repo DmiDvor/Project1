@@ -80,6 +80,11 @@ router.get('/translate', async (req, res) => {
     let randIndex = Math.floor(Math.random() * words.length)
     randomWord = words[randIndex]
 
+    // Проверка на повтор случайного слова
+    let usedWords = []
+    usedWords.push(randomWord.origin)
+    console.log(`usedWords: ${usedWords}`)
+
 
     // Рендерим страничку со случайным словом
     res.render('translate', {
