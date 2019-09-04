@@ -4,6 +4,7 @@ const Words = require('../models/Words')
 const router = Router()
 
 
+
 let randomWord
 let correct = 0
 let wrong = 0
@@ -71,10 +72,21 @@ router.get('/translate', async (req, res) => {
 
     // Получаем массив слов из БД
     const words = await Words.find({})
+    
 
     // Получаем случайное слово из массива
     let randIndex = Math.floor(Math.random() * words.length)
     randomWord = words[randIndex]
+    // console.log(`Random words  ${randomWord}`)
+
+    if (randomWord) {
+        usedWords.push(randomWord.origin)
+    }
+
+    console.log(`Used words ${usedWords}`)
+    // Проверка на повторы
+
+
     
     // Рендерим страничку со случайным словом
     res.render('translate', {
