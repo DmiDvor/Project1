@@ -7,6 +7,9 @@ const router = Router()
 let randomWord
 let correct = 0
 let wrong = 0
+let usedWords = []
+
+
 // === Маршрутизация ===
 
 // Корневой маршрут
@@ -21,13 +24,6 @@ router.get('/', async (req, res) => {
     })
 }) 
 
-// Маршрут на страницу create
-// router.get('/create', (req, res) => {
-//     res.render('create', {
-//         title: 'Create todo',
-//         isCreate: true
-//     })
-// })
 
 // Маршрут на страницу Add words
 router.get('/addWords', (req, res) => {
@@ -79,13 +75,7 @@ router.get('/translate', async (req, res) => {
     // Получаем случайное слово из массива
     let randIndex = Math.floor(Math.random() * words.length)
     randomWord = words[randIndex]
-
-    // Проверка на повтор случайного слова
-    let usedWords = []
-    usedWords.push(randomWord.origin)
-    console.log(`usedWords: ${usedWords}`)
-
-
+    
     // Рендерим страничку со случайным словом
     res.render('translate', {
         title: 'Translate',
