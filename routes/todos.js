@@ -2,6 +2,7 @@ const { Router } = require('express')
 const Todo = require('../models/Todo') // Подключаем модель
 const Words = require('../models/Words')
 const router = Router()
+const translate = require('../translate.js')
 
 
 
@@ -9,6 +10,7 @@ let randomWord
 let correct = 0
 let wrong = 0
 let usedWords = []
+
 
 
 // === Маршрутизация ===
@@ -72,29 +74,52 @@ router.get('/translate', async (req, res) => {
 
     // Получаем массив слов из БД
     const words = await Words.find({})
-    
 
     // Получаем случайное слово из массива
-    let randIndex = Math.floor(Math.random() * words.length)
-    randomWord = words[randIndex]
-    // console.log(`Random words  ${randomWord}`)
-
-    if (randomWord) {
-        usedWords.push(randomWord.origin)
+    const getWord = function () {
+        let randIndex = Math.floor(Math.random() * words.length)
+        randomWord = words[randIndex]
+        // console.log(`Random word is:  ${randomWord}`)
+        return randomWord
+        
+    }
+    getWord()
+    // Проверка на повторы
+    
+    const checkRepeat = function (randomWord) {
+        getWord()
+        try {
+            if (usedWords.includes(randomWord.origin)) {
+            console.log('Повтор!!!')
+            
+            checkRepeat(randomWord)
+            } else {
+            usedWords.push(randomWord.origin)
+            console.log(`Used words: ${usedWords.join(', ')}`)
+            
+        } 
+            if (usedWords.length == words.length) console.log('Thats all!!!')
+            return randomWord
+       } catch {
+           console.log (`${randomWord} not found =(`)
+       }
+       
     }
 
-    console.log(`Used words ${usedWords}`)
-    // Проверка на повторы
+    checkRepeat (randomWord)
+    console.log(`After checkRepeat randomWord is: ${randomWord.origin}`)
 
+    // Осталось слов
+    let wordsLeft = words.length - usedWords.length
 
-    
     // Рендерим страничку со случайным словом
     res.render('translate', {
         title: 'Translate',
         isTranslate: true,
         isCorrect: correct,
         isWrong: wrong,
-        randomWord
+        randomWord,
+        wordsLeft: wordsLeft
     })
     
 })

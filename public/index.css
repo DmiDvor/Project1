@@ -55,3 +55,10 @@
 .reset-btn {
     float: right;
 }
+
+.wordsLeft {
+    margin-top: 15px;
+    font-style: oblique;
+    font-size: 0.9rem;
+    color: gray;
+}
