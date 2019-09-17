@@ -86,28 +86,24 @@ router.get('/translate', async (req, res) => {
     getWord()
     // Проверка на повторы
     
-    const checkRepeat = function (randomWord) {
+    const checkRepeat = function () {
         getWord()
         try {
             if (usedWords.includes(randomWord.origin)) {
             console.log('Повтор!!!')
-            
-            checkRepeat(randomWord)
+            checkRepeat()
             } else {
             usedWords.push(randomWord.origin)
             console.log(`Used words: ${usedWords.join(', ')}`)
-            
-        } 
-            if (usedWords.length == words.length) console.log('Thats all!!!')
-            return randomWord
-       } catch {
+            }
+        } catch {
            console.log (`${randomWord} not found =(`)
-       }
+        }
        
     }
 
-    checkRepeat (randomWord)
-    console.log(`After checkRepeat randomWord is: ${randomWord.origin}`)
+    checkRepeat ()
+    // console.log(`After checkRepeat randomWord is: ${randomWord.origin}`)
 
     // Осталось слов
     let wordsLeft = words.length - usedWords.length
