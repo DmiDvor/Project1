@@ -63,6 +63,13 @@
     color: gray;
 }
 
+.score {
+    margin-top: 50px;
+    background: rgb(35, 165, 100);
+    color: rgb(252, 251, 246);
+    font-size: 3rem;
+}
+
 .score-invisible {
     display: none;
 }

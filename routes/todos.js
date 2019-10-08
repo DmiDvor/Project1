@@ -2,7 +2,7 @@ const { Router } = require('express')
 const Todo = require('../models/Todo') // Подключаем модель
 const Words = require('../models/Words')
 const router = Router()
-const translate = require('../translate.js')
+// const translate = require('../translate.js')
 
 
 
@@ -81,30 +81,35 @@ router.get('/translate', async (req, res) => {
         randomWord = words[randIndex]
         // console.log(`Random word is:  ${randomWord}`)
         return randomWord
-        
     }
+
     getWord()
+    
+
     // Проверка на повторы
     
     const checkRepeat = function () {
-        getWord()
+        
         try {
             if (usedWords.includes(randomWord.origin)) {
-            console.log('Повтор!!!')
-            checkRepeat()
+                checkRepeat()
             } else {
-            usedWords.push(randomWord.origin)
-            console.log(`Used words: ${usedWords.join(', ')}`)
+                usedWords.push(randomWord.origin)
+                console.log('UWL = ' + usedWords.length)
+                console.log('WL = ' + words.length)
+                if (usedWords.length == words.length) {
+                    res.render('result', {
+                        isCorrect:correct
+                    })
+                }
             }
         } catch {
            console.log (`${randomWord} not found =(`)
         }
-       
     }
 
     checkRepeat ()
-    // console.log(`After checkRepeat randomWord is: ${randomWord.origin}`)
-
+    
     // Осталось слов
     let wordsLeft = words.length - usedWords.length
 
@@ -117,7 +122,6 @@ router.get('/translate', async (req, res) => {
         randomWord,
         wordsLeft: wordsLeft
     })
-    
 })
 
 // Обработка перевода
@@ -142,6 +146,8 @@ router.post('/reset', async (req, res) => {
     wrong = 0
     res.redirect('/translate')
 })
+
+/////////////////////////////////////////////////////////////////////////////
 
 // Запрос на добавления слова в базу по модели из Words.js
 router.post('/addWord', async (req, res) => {
